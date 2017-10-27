@@ -7,18 +7,13 @@ class NightWriter
   end
 
   def encode_to_braille(plain)
-    output = []
-    [0,2,4].each do |offset|
-      plain.chars.each do |letter|
-        if letter == letter.upcase
-          output << lookup(:capitalize, offset) << lookup(:capitalize, offset + 1)
-          letter = letter.downcase
-        end
-        output << lookup(letter, offset) << lookup(letter, offset + 1)
+    braille_chars = plain.chars.map do |letter|
+      if letter == letter.upcase
+        return lookup(:capitalize) + lookup(letter.downcase)
       end
-      output << "\n"
+      return lookup(letter)
     end
-    encoded = output.join
+    braille_chars.join
   end
 
   def decode_from_braille(braille)
@@ -54,7 +49,7 @@ class NightWriter
 
   private
 
-  def lookup(character, position)
-    @alphabet.braille_letter_hash[character].chars[position]
+  def lookup(character)
+    @alphabet.braille_letter_hash[character]
   end
 end
