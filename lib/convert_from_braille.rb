@@ -1,6 +1,7 @@
 require_relative 'alphabet'
 
 class ConvertFromBraille
+
   def initialize
     @alphabet = Alphabet.new
   end
