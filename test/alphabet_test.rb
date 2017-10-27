@@ -12,11 +12,10 @@ class AlphabetTest < Minitest::Test
 
 	def test_hash_values_as_braille
 		alphabet.braille_letter_hash.each do | k, v|
-			assert_equal 6, v.length
+			assert_equal 9, v.length
 			v.chars.each do |c|
-				assert c == '0' || c == '.'
+				assert c == "0" || c == "." || c == "\n"
 			end
 		end
 	end
 end
-
