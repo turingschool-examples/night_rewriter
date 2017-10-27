@@ -3,8 +3,6 @@ require 'pry'
 
 class NightWriter
 
-  attr_accessor :alphabet
-
   def initialize
     @alphabet = Alphabet.new
   end
@@ -38,18 +36,37 @@ class NightWriter
   end
 
   def encode_from_braille(braille)
-    top, middle, bottom = into_array(braille)
-    new_arr = []
-    until top.empty?
-      new_arr << [top.shift(2).join, middle.shift(2).join, bottom.shift(2).join]
+    into_array(braille)
+    binding.pry
+    lines = braille.split("\n")
+    n = lines[0].length
+    m = 3
+    as_one_line = lines.join
+    output = []
+    should_capitalize_next = false
+
+    (0..(n-1)).each_slice(2) do |column_offset|
+
+      braille_character = []
+      (0..(m-1)).each do |row_offset|
+        braille_character << as_one_line[(row_offset * n) + column_offset[0]]
+        braille_character << as_one_line[(row_offset * n) + column_offset[1]]
+      end
+
+      decoded_braille = @alphabet.braille_letter_hash.key(braille_character.join)
+
+      if decoded_braille == :capitalize
+        should_capitalize_next = true
+      elsif should_capitalize_next
+        output << decoded_braille.upcase
+        should_capitalize_next = false
+      else
+        output << decoded_braille
+        should_capitalize_next = false
+      end
     end
-    @final =  new_arr.map do |word|
-      result = []
-      first = alphabet.to_english(word)
-    end
-    @final.join("")
+    output.join
   end
 end
-
 t = NightWriter.new
 puts t.encode_to_braille("hihfishfi hifhd")
