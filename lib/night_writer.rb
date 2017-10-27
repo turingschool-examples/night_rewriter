@@ -14,37 +14,22 @@ class NightWriter
   end
 
   def brail_line(character, position)
-    start_range = position
-    @alphabet[character.downcase][start_range..start_range + 1]
+    result = ""
+    range = position..position + 1
+    result << @alphabet[:capitalize][range] if character == character.upcase
+    result << @alphabet[character.downcase][range]
   end
 
   def encode_to_braille(plain)
-    output = []
+    output = ""
     [0,2,4].each do |offset|
       plain.chars.each do |letter|
-        if letter == letter.upcase
-          # output << lookup(:capitalize, offset) << lookup(:capitalize, offset + 1)
-          output << brail_line(:capitalize, offset)
-          letter = letter.downcase
-        end
-        # output << lookup(letter, offset) << lookup(letter, offset + 1)
         output << brail_line(letter, offset)
       end
       output << "\n"
     end
-    output.join
+    output
   end
-
-  # def encode_to_braille(plain)
-  #   output = {1=>"", 2=> "", 3=> ""}
-  #   plain_split = plain.split("")
-  #   3.times do |i|
-  #     plain_split.each do |letter|
-  #       output[i] += lookup(letter, i)
-  #     end
-  #   end
-  #   output
-  # end
 
   def encode_from_braille(braille)
     lines = braille.split("\n")
