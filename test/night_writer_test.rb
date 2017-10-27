@@ -17,11 +17,11 @@ class NightWriterTest < Minitest::Test
   end
 
   def skip test_decodes_letter
-    assert_equal "a", writer.decode_from_braille("0.\n..\n..\n")
+    assert_equal "a", writer.encode_from_braille("0.\n..\n..\n")
   end
 
   def skip test_decodes_cap_letter
-    assert_equal "A", writer.decode_from_braille("..0.\n....\n.0..\n")
+    assert_equal "A", writer.encode_from_braille("..0.\n....\n.0..\n")
   end
 
   def skip test_encodes_message
@@ -29,6 +29,6 @@ class NightWriterTest < Minitest::Test
   end
 
   def skip test_decodes_message
-    assert_equal "Hello World",writer.decode_from_braille("..0.0.0.0.0........00.0.0.00\n..00.00.0..0......00.0000..0\n.0....0.0.0..0...0.00.0.0...\n")
+    assert_equal "Hello World",writer.encode_from_braille("..0.0.0.0.0........00.0.0.00\n..00.00.0..0......00.0000..0\n.0....0.0.0..0...0.00.0.0...\n")
   end
 end

@@ -16,7 +16,7 @@ class NightWriter
     braille_chars.join
   end
 
-  def decode_from_braille(braille)
+  def encode_from_braille(braille)
     lines = braille.split("\n")
     n = lines[0].length
     m = 3
