@@ -26,10 +26,11 @@ class NightWriter
 
   def encode_from_braille(braille)
     lines = braille.split("\n")
-    # binding.pry
     n = lines[0].length
     m = 3
-    as_one_line = lines.join
+    # as_one_line = lines.join
+    as_one_line = braille.tr("\n", "")
+    binding.pry
     output = []
     should_capitalize_next = false
 
