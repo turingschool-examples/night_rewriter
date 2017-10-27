@@ -21,7 +21,7 @@ class NightWriter
     encoded = output.join
   end
 
-  def encode_from_braille(braille)
+  def decode_from_braille(braille)
     lines = braille.split("\n")
     n = lines[0].length
     m = 3
@@ -56,5 +56,5 @@ class NightWriter
 
   def lookup(character, position)
     @alphabet.braille_letter_hash[character].chars[position]
-  end  
+  end
 end
