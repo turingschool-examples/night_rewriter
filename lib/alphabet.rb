@@ -1,8 +1,6 @@
 class Alphabet
-	attr_reader :braille_letter_hash
-
-	def initialize
-		@braille_letter_hash = {
+	def self.braille_translations
+		{
 			"a" => "0.....",
 			"b" => "0.0...",
 			"c" => "00....",
@@ -41,4 +39,3 @@ class Alphabet
 		}
 	end
 end
-
