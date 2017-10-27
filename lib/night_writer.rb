@@ -1,3 +1,4 @@
+
 require_relative 'alphabet'
 
 class NightWriter
@@ -56,4 +57,5 @@ class NightWriter
     output.join
   end
 end
+
 
