@@ -4,18 +4,18 @@ require 'pry'
 class NightWriter
 
   def initialize
-    @alphabet = Alphabet.new
+    @alphabet = Alphabet.braille_translations
   end
 
   def lookup(character, position)
     # start_range = position
     # @alphabet.braille_letter_hash[character.downcase][start_range..start_range + 1]
-    @alphabet.braille_letter_hash[character].chars[position]
+    @alphabet[character].chars[position]
   end
 
   def brail_line(character, position)
     start_range = position
-    @alphabet.braille_letter_hash[character.downcase][start_range..start_range + 1]
+    @alphabet[character.downcase][start_range..start_range + 1]
   end
 
   def encode_to_braille(plain)
@@ -62,7 +62,7 @@ class NightWriter
         braille_character << as_one_line[(row_offset * n) + column_offset[1]]
       end
 
-      decoded_braille = @alphabet.braille_letter_hash.key(braille_character.join)
+      decoded_braille = @alphabet.key(braille_character.join)
 
       if decoded_braille == :capitalize
         should_capitalize_next = true
