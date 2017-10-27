@@ -1,5 +1,5 @@
 require './test/test_helper'
-require './lib/night_writer'
+require './lib/convert_to_braille'
 require './lib/alphabet'
 
 class ConvertToBraille < Minitest::Test

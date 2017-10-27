@@ -14,7 +14,7 @@ class ConvertToBraille
     output = []
     [0,2,4].each do |offset|
       plain.chars.each do |letter|
-        if letter == letter.upcase
+        if letter.upcase
           output << lookup(:capitalize, offset) << lookup(:capitalize, offset + 1)
           letter = letter.downcase
         end
