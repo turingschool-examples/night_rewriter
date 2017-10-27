@@ -45,9 +45,9 @@ class NightWriter
     end
     @final =  new_arr.map do |word|
       result = []
-      result.join << alphabet.to_english(word)
+      first = alphabet.to_english(word)
     end
-    binding.pry
+    @final.join("")
   end
 end
 
