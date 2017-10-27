@@ -41,4 +41,3 @@ class Alphabet
 		}
 	end
 end
-

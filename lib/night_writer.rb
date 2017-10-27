@@ -1,4 +1,5 @@
 require_relative 'alphabet'
+require 'pry'
 
 class NightWriter
 
@@ -11,18 +12,35 @@ class NightWriter
   end
 
   def encode_to_braille(plain)
-    output = []
-    [0,2,4].each do |offset|
-      plain.chars.each do |letter|
-        if letter == letter.upcase
-          output << lookup(:capitalize, offset) << lookup(:capitalize, offset + 1)
-          letter = letter.downcase
-        end
-        output << lookup(letter, offset) << lookup(letter, offset + 1)
-      end
-      output << "\n"
-    end
-    encoded = output.join
+    # output = []
+    # [0,2,4].each do |offset| #loop through offset 0,2,4
+    #   plain.chars.each do |letter| #string to array of characters
+    #     if letter == letter.upcase #returns true if letter is uppercase
+    #       output << lookup(:capitalize, offset) << lookup(:capitalize, offset + 1) #push capital character + offset, ca
+    #       letter = letter.downcase
+    #     end
+    #     output << lookup(letter, offset) << lookup(letter, offset + 1)
+    #   end
+    #   output << "\n"
+    # end
+    # encoded = output.join
+    # offsets = [0,1,2,3,4,5]
+    plain.split(' ').map {|word|
+      convert(word).flatten.join('')
+    }.flatten.join('')
+  end
+
+  def convert(word)
+    word.split('').map { |letter|
+      insert_new_line(@alphabet.braille_letter_hash[letter].split(''), word).flatten
+    }
+  end
+
+  def insert_new_line(arr, word)
+    a = arr.each_slice(2).to_a
+    a.insert(1, "\n")
+    a.insert(3, "\n")
+    a.insert(-1, "\n")
   end
 
   def encode_from_braille(braille)
@@ -56,4 +74,3 @@ class NightWriter
     output.join
   end
 end
-
