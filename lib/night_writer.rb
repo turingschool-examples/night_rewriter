@@ -8,8 +8,6 @@ class NightWriter
   end
 
   def lookup(character, position)
-    # start_range = position
-    # @alphabet.braille_letter_hash[character.downcase][start_range..start_range + 1]
     @alphabet[character].chars[position]
   end
 
