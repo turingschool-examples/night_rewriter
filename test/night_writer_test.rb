@@ -12,7 +12,7 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_postion
-    assert_equal ".", writer.lookup(:capitalize, 0)
+     assert_equal ".", writer.lookup(:capitalize, 0)
   end
 
   def test_can_encode_a_letter
@@ -39,4 +39,3 @@ class NightWriterTest < Minitest::Test
     assert_equal "Hello World",writer.encode_from_braille("..0.0.0.0.0........00.0.0.00\n..00.00.0..0......00.0000..0\n.0....0.0.0..0...0.00.0.0...\n")
   end
 end
-
