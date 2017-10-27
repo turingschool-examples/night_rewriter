@@ -4,11 +4,9 @@ require_relative 'convert_to_braille'
 
 class NightWriter
   def initialize
-
+    @ToBraille = ConvertToBraille
+    @FromBraille = ConvertFromBraille
   end
-
-  ConvertToBraille.encode(plain)
-  ConvertFromBraille.encode(braille)
 end
 
 

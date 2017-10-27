@@ -1,6 +1,7 @@
 require_relative 'alphabet'
 
 class ConvertToBraille
+
   def initialize
     @alphabet = Alphabet.new
   end
@@ -9,7 +10,7 @@ class ConvertToBraille
     @alphabet.braille_letter_hash[character].chars[position]
   end
 
-  def self.encode(plain)
+  def encode(plain)
     output = []
     [0,2,4].each do |offset|
       plain.chars.each do |letter|
