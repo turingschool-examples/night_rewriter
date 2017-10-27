@@ -1,59 +1,34 @@
-require_relative 'alphabet'
+require_relative 'braille_reader'
+require_relative 'braille_writer'
+require_relative 'file_reader'
 
 class NightWriter
+  attr_reader :file
 
   def initialize
-    @alphabet = Alphabet.new
+    @file = FileReader.new
   end
 
-  def lookup(character, position)
-    @alphabet.braille_letter_hash[character].chars[position]
+  def encode_from_braille(input_file, output_file) # take braille.txt ARGV[0] and parse into message.txt ARGV[1]
+    # open exisiting braille file and save text to variable
+    text = @file.read(input_file)
+    # parse it thru translator method to turn it to english
+    braille = parse_from_braille(text)
+    # write a new file
+    file_in_english = @file.write(braille, output_file) # arguments are text and file to write to
   end
 
-  def encode_to_braille(plain)
-    output = []
-    [0,2,4].each do |offset|
-      plain.chars.each do |letter|
-        if letter == letter.upcase
-          output << lookup(:capitalize, offset) << lookup(:capitalize, offset + 1)
-          letter = letter.downcase
-        end
-        output << lookup(letter, offset) << lookup(letter, offset + 1)
-      end
-      output << "\n"
-    end
-    encoded = output.join
+  def parse_from_braille(text)
+    BrailleReader.new.encode_from_braille(text)
   end
 
-  def encode_from_braille(braille)
-    lines = braille.split("\n")
-    n = lines[0].length
-    m = 3
-    as_one_line = lines.join
-    output = []
-    should_capitalize_next = false
+  def encode_to_braille(input_file, output_file)
+    read_to_translate = @file.read(input_file)
+    english = parse_to_english(text)
+    file_in_braille = @file_writer.write(output_file, english)
+  end
 
-    (0..(n-1)).each_slice(2) do |column_offset|
-
-      braille_character = []
-      (0..(m-1)).each do |row_offset|
-        braille_character << as_one_line[(row_offset * n) + column_offset[0]]
-        braille_character << as_one_line[(row_offset * n) + column_offset[1]]
-      end
-
-      decoded_braille = @alphabet.braille_letter_hash.key(braille_character.join)
-
-      if decoded_braille == :capitalize
-        should_capitalize_next = true
-      elsif should_capitalize_next
-        output << decoded_braille.upcase
-        should_capitalize_next = false
-      else
-        output << decoded_braille
-        should_capitalize_next = false
-      end
-    end
-    output.join
+  def parse_to_english(text)
+    BrailleWriter.new.encode_to_braille(text)
   end
 end
-
