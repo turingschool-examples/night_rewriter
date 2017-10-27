@@ -6,10 +6,6 @@ class NightWriter
     @alphabet = Alphabet.new
   end
 
-  def lookup(character, position)
-    @alphabet.braille_letter_hash[character].chars[position]
-  end
-
   def encode_to_braille(plain)
     output = []
     [0,2,4].each do |offset|
@@ -55,5 +51,10 @@ class NightWriter
     end
     output.join
   end
-end
 
+  private
+
+  def lookup(character, position)
+    @alphabet.braille_letter_hash[character].chars[position]
+  end  
+end
