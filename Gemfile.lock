@@ -17,7 +17,8 @@ PLATFORMS
 
 DEPENDENCIES
   minitest
+  pry
   pry-state
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
