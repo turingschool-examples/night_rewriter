@@ -23,31 +23,10 @@ class NightWriter
     encoded = @output.join
   end
 
-  def encode_top_line(plain)
-    encode(plain, 0)
-  end
-
-  def encode_mid_line(plain)
-    encode(plain, 2)
-  end
-
-  def encode_bot_line(plain)
-    encode(plain, 4)
-  end
-
-  def encode(plain, offset)
-    plain.chars.each do |letter|
-      if letter == letter.upcase && letter != " "
-        @output << new_lookup(:capitalize).slice(offset, 2)
-        letter = letter.downcase
-      end
-      @output << new_lookup(letter).slice(offset, 2)
-    end
-    @output << "\n"
-  end
 
   def encode_from_braille(braille)
     lines = braille.split("\n")
+    # binding.pry
     n = lines[0].length
     m = 3
     as_one_line = lines.join
@@ -76,4 +55,27 @@ class NightWriter
     end
     output.join
   end
+
+  private
+
+  def encode_top_line(plain)
+    encode(plain, 0, "..")
+  end
+
+  def encode_mid_line(plain)
+    encode(plain, 2, "..")
+  end
+
+  def encode_bot_line(plain)
+    encode(plain, 4, ".0")
+  end
+
+  def encode(plain, offset, capital_chars)
+    plain.chars.each do |letter|
+      @output << capital_chars if letter == letter.upcase && letter != " "
+      @output << new_lookup(letter.downcase).slice(offset, 2)
+    end
+    @output << "\n"
+  end
+
 end
