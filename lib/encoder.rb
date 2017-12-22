@@ -38,7 +38,7 @@ class Encoder
     end
   end
 
-  def append_braille_letter(letter, offsetg)
+  def append_braille_letter(letter, offset)
     output << @alphabet.lookup(letter, offset) << @alphabet.lookup(letter, offset + 1)
   end
 
