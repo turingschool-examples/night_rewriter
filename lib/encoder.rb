@@ -8,22 +8,24 @@ class Encoder
   def initialize
     @alphabet = Alphabet.new
     @output =[]
+    @offsets = [0,2,4]
   end
 
   def encode_to_braille(plain)
-    [0,2,4].each do |offset|
-      letter_iterator(plain, offset)
-      # plain.chars.each do |letter|
-      #   check_letter(letter, offset)
-      # end
-      @output << "\n"
-    end
-    encoded = @output.join
+    offset_iterator(plain)
+    @output.join
   end
 
   def letter_iterator(plain, offset)
     plain.chars.each do |letter|
       check_letter(letter, offset)
+    end
+  end
+
+  def offset_iterator(plain)
+    @offsets.each do |offset|
+      letter_iterator(plain, offset)
+      @output << "\n"
     end
   end
 
