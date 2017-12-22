@@ -7,6 +7,7 @@ class NightWriterTest < Minitest::Test
   def writer
     @writer ||= NightWriter.new
   end
+  
   def test_can_lookup
     assert_equal ".", writer.lookup("a", 4)
   end
@@ -39,4 +40,3 @@ class NightWriterTest < Minitest::Test
     assert_equal "Hello World",writer.encode_from_braille("..0.0.0.0.0........00.0.0.00\n..00.00.0..0......00.0000..0\n.0....0.0.0..0...0.00.0.0...\n")
   end
 end
-
