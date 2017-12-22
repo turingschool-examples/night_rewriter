@@ -8,9 +8,7 @@ module Encoder_Helpers
   end
 
   def letter_iterator(plain, offset)
-    plain.chars.each do |letter|
-      check_letter(letter, offset)
-    end
+    plain.chars.map { |letter| check_letter(letter, offset) }
   end
 
   def check_letter(letter, offset)
