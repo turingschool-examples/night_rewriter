@@ -26,14 +26,14 @@ module Decoder_Helpers
   end
 
   def capital_check(decoded_braille)
-    if decoded_braille == :capitalize
-      @should_capitalize_next = true
+    @should_capitalize_next = if decoded_braille == :capitalize
+      true
     elsif @should_capitalize_next
       @output << decoded_braille.upcase
-      @should_capitalize_next = false
+      false
     else
       @output << decoded_braille
-      @should_capitalize_next = false
+      false
     end
   end
 
