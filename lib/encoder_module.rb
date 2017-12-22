@@ -13,9 +13,13 @@ module Encoder_Helpers
 
   def check_letter(letter, offset)
     if letter == letter.upcase
-      @output << lookup(:capitalize, offset) << lookup(:capitalize, offset + 1)
+      letter_insert(:capitalize, offset)
       letter = letter.downcase
     end
+    letter_insert(letter, offset)
+  end
+
+  def letter_insert(letter, offset)
     @output << lookup(letter, offset) << lookup(letter, offset + 1)
   end
 
