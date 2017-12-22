@@ -10,10 +10,10 @@ module Decoder_Helpers
   end
 
   def row_iterator(braille_character, column_offset, n)
-    (0..2).each do |row_offset|
+    (0..2).map {|row_offset|
       braille_character << braille_assembler(row_offset, column_offset[0], n)
       braille_character << braille_assembler(row_offset, column_offset[1], n)
-    end
+    }
     braille_character
   end
 
@@ -36,6 +36,5 @@ module Decoder_Helpers
       @should_capitalize_next = false
     end
   end
-
 
 end
