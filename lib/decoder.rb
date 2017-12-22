@@ -1,6 +1,13 @@
 require_relative 'alphabet'
+require_relative 'lookup_module'
 
-module Decoder
+class Decoder
+
+  include Lookup
+
+  def initialize
+    @alphabet = Alphabet.new
+  end
 
   def encode_from_braille(braille)
     lines = braille.split("\n")
@@ -32,5 +39,5 @@ module Decoder
     end
     output.join
   end
-  
+
 end

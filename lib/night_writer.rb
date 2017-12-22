@@ -1,18 +1,18 @@
 require_relative 'alphabet'
 require_relative 'encoder'
 require_relative 'decoder'
+require_relative 'lookup_module'
 
 class NightWriter
 
-  include Encoder
-  include Decoder
+  attr_reader :encoder, :decoder
+
+  include Lookup
 
   def initialize
     @alphabet = Alphabet.new
-  end
-
-  def lookup(character, position)
-    @alphabet.braille_letter_hash[character].chars[position]
+    @encoder = Encoder.new
+    @decoder = Decoder.new
   end
 
 end

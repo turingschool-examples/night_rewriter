@@ -1,6 +1,13 @@
 require_relative 'alphabet'
+require_relative 'lookup_module'
 
-module Encoder
+class Encoder
+
+  include Lookup
+
+  def initialize
+    @alphabet = Alphabet.new
+  end
 
   def encode_to_braille(plain)
     output = []
