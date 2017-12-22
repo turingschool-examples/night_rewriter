@@ -6,24 +6,48 @@ class NightWriter
     @alphabet = Alphabet.new
   end
 
-  # def lookup(character, position)
-  #   @alphabet.braille_letter_hash[character].chars[position]
-  # end
+  # MASTER METHOD - ENCODE
 
   def encode_to_braille(plain)
     output = []
-    [0,2,4].each do |offset|
-      plain.chars.each do |letter|
-        if letter == letter.upcase
-          output << @alphabet.lookup(:capitalize, offset) << @alphabet.lookup(:capitalize, offset + 1)
-          letter = letter.downcase
-        end
-        output << @alphabet.lookup(letter, offset) << @alphabet.lookup(letter, offset + 1)
-      end
-      output << "\n"
-    end
-    encoded = output.join
+    build_lines(plain, output)
+    output.join
   end
+
+  # encode to braille
+
+  def build_lines(plain, output)
+    [0,2,4].each do |offset|
+      convert(plain, offset, output)
+    end
+  end
+
+  def convert(plain, offset, output)
+    append_line(plain, offset, output)
+    append_line_break(output)
+  end
+
+  def append_line_break(output)
+    output << "\n"
+  end
+
+  def append_line(plain, offset, output)
+    plain.chars.each do |letter|
+      letter = capitalize(letter, offset, output) if letter == letter.upcase
+      append_braille_letter(letter, offset, output)
+    end
+  end
+
+  def append_braille_letter(letter, offset, output)
+    output << @alphabet.lookup(letter, offset) << @alphabet.lookup(letter, offset + 1)
+  end
+
+  def capitalize(letter, offset, output)
+    output << @alphabet.lookup(:capitalize, offset) << @alphabet.lookup(:capitalize, offset + 1)
+    letter.downcase
+  end
+
+  # MASTER METHOD - DECODE
 
   def encode_from_braille(braille)
     lines = braille.split("\n")
@@ -56,4 +80,3 @@ class NightWriter
     output.join
   end
 end
-
