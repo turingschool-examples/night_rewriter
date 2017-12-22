@@ -1,5 +1,5 @@
 class Alphabet
-	attr_reader :braille_letter_hash
+  attr_reader :braille_letter_hash
 
 	def initialize
 		@braille_letter_hash = {
