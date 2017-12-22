@@ -52,6 +52,8 @@ class NightWriter
 
       decoded_braille = @alphabet.braille_letter_hash.key(braille_character.join)
 
+      # output = check_for_capitals(decoded_braille)
+
       if decoded_braille == :capitalize
         should_capitalize_next = true
       elsif should_capitalize_next
@@ -64,6 +66,20 @@ class NightWriter
     end
     output.join
   end
+
+  # def check_for_capitals(decoded_braille)
+  #   output = []
+  #   if decoded_braille == :capitalize
+  #     should_capitalize_next = true
+  #   elsif should_capitalize_next
+  #     output << decoded_braille.upcase
+  #     should_capitalize_next = false
+  #   else
+  #     output << decoded_braille
+  #     should_capitalize_next = false
+  #   end
+  #   return output
+  # end
 
   def make_character(column_offset, as_one_line, n)
     braille_character = []
