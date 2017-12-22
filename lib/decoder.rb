@@ -15,14 +15,17 @@ class Decoder
   def encode_from_braille(braille)
     @lines = braille.split("\n")
     n = @lines[0].length
+    column_iterator(n)
+    @output.join
+  end
 
+  def column_iterator(n)
     (0..(n-1)).each_slice(2) do |column_offset|
       braille_character = []
       row_iterator(braille_character, column_offset, n)
       decoded_braille = braille_decoder(braille_character.join)
       capital_check(decoded_braille)
     end
-    @output.join
   end
 
   def row_iterator(braille_character, column_offset, n)
