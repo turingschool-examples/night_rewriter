@@ -7,15 +7,16 @@ class Decoder
 
   def initialize
     @alphabet = Alphabet.new
+    @output = []
+    @should_capitalize_next = false
+    @lines = []
   end
 
   def encode_from_braille(braille)
-    lines = braille.split("\n")
-    n = lines[0].length
+    @lines = braille.split("\n")
+    n = @lines[0].length
     m = 3
-    as_one_line = lines.join
-    output = []
-    should_capitalize_next = false
+    as_one_line = @lines.join
 
     (0..(n-1)).each_slice(2) do |column_offset|
 
@@ -28,16 +29,16 @@ class Decoder
       decoded_braille = @alphabet.braille_letter_hash.key(braille_character.join)
 
       if decoded_braille == :capitalize
-        should_capitalize_next = true
-      elsif should_capitalize_next
-        output << decoded_braille.upcase
-        should_capitalize_next = false
+        @should_capitalize_next = true
+      elsif @should_capitalize_next
+        @output << decoded_braille.upcase
+        @should_capitalize_next = false
       else
-        output << decoded_braille
-        should_capitalize_next = false
+        @output << decoded_braille
+        @should_capitalize_next = false
       end
     end
-    output.join
+    @output.join
   end
 
 end
