@@ -1,21 +1,22 @@
 require 'pry'
-require_relative 'converter'
+require_relative 'encoder'
+require_relative 'decoder'
 require_relative 'lookup'
 
 class NightWriter
   include Lookup
-  attr_reader :converter
 
   def initialize
-    @converter = Converter.new
+    @encoder = Encoder.new
+    @decoder = Decoder.new
   end
 
   def encode_to_braille(plain)
-    @converter.encode_to_braille(plain)
+    @encoder.encode_to_braille(plain)
   end
 
   def encode_from_braille(braille)
-    @converter.from_braille(braille)
+    @decoder.from_braille(braille)
   end
 end
 
