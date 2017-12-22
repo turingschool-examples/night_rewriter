@@ -16,14 +16,13 @@ class Decoder
     @lines = braille.split("\n")
     n = @lines[0].length
     m = 3
-    as_one_line = @lines.join
 
     (0..(n-1)).each_slice(2) do |column_offset|
 
       braille_character = []
       (0..(m-1)).each do |row_offset|
-        braille_character << as_one_line[(row_offset * n) + column_offset[0]]
-        braille_character << as_one_line[(row_offset * n) + column_offset[1]]
+        braille_character << @lines.join[(row_offset * n) + column_offset[0]]
+        braille_character << @lines.join[(row_offset * n) + column_offset[1]]
       end
 
       decoded_braille = @alphabet.braille_letter_hash.key(braille_character.join)
