@@ -9,8 +9,8 @@ class Decoder
   def initialize
     @alphabet = Alphabet.new
     @output = []
-    @should_capitalize_next = false
     @lines = []
+    @should_capitalize_next = false
   end
 
   def encode_from_braille(braille)
