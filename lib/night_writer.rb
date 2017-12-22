@@ -1,35 +1,33 @@
 require_relative 'alphabet'
 
 class NightWriter
-  attr_reader :alphabet
+  include Alphabet
 
   def initialize
-    @alphabet = Alphabet.new
-  end
-
-  def lookup(character, position)
-    alphabet.braille_letter_hash[character].chars[position]
+    @output = []
   end
 
   def encode_to_braille(plain)
-    output = []
     [0,2,4].each do |offset|
-      plain_chars(plain, output, offset)
+      plain_chars(plain, offset)
       output << "\n"
     end
     output.join
   end
 
-  def plain_chars(plain, output, offset)
-    plain.chars.each {|letter| if_block(letter, output, offset)}
-  end
+  private
+    attr_reader :output
 
-  def if_block(letter, output, offset)
-    if letter == letter.upcase
-      output << lookup(:capitalize, offset) << lookup(:capitalize, offset + 1)
-      letter = letter.downcase
+    def plain_chars(plain, offset)
+      plain.chars.each {|letter| if_block(letter, offset)}
     end
-    output << lookup(letter, offset) << lookup(letter, offset + 1)
-  end
+
+    def if_block(letter, offset)
+      if letter == letter.upcase
+        output << lookup(:capitalize, offset) << lookup(:capitalize, offset + 1)
+        letter = letter.downcase
+      end
+      output << lookup(letter, offset) << lookup(letter, offset + 1)
+    end
 
 end
