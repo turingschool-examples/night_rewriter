@@ -46,10 +46,6 @@ module Parser
   end
 
   def format_to_one_line(braille)
-    lines = braille.split("\n")
-    n = lines[0].length
-    m = 3
-    lines.join
   end
 
 end
