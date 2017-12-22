@@ -22,7 +22,7 @@ class Decoder
         braille_character << braille_assembler(row_offset, column_offset[0], n)
         braille_character << braille_assembler(row_offset, column_offset[1], n)
       end
-      decoded_braille = @alphabet.braille_letter_hash.key(braille_character.join)
+      decoded_braille = braille_decoder(braille_character.join)
       capital_check(decoded_braille)
     end
     @output.join
@@ -30,6 +30,10 @@ class Decoder
 
   def braille_assembler(row, column, n)
     @lines.join[(row * n) + column]
+  end
+
+  def braille_decoder(braille_string)
+    @alphabet.braille_letter_hash.key
   end
 
   def capital_check(decoded_braille)
