@@ -34,5 +34,4 @@ class Decoder
     output.reduce(:+)
   end
 
-
 end
