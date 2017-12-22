@@ -8,8 +8,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-state (0.1.9)
-      pry (>= 0.9.10, < 0.11.0)
     slop (3.6.0)
 
 PLATFORMS
@@ -17,7 +15,7 @@ PLATFORMS
 
 DEPENDENCIES
   minitest
-  pry-state
+  pry
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
