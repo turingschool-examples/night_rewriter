@@ -19,13 +19,17 @@ class Decoder
     (0..(n-1)).each_slice(2) do |column_offset|
       braille_character = []
       (0..2).each do |row_offset|
-        braille_character << @lines.join[(row_offset * n) + column_offset[0]]
-        braille_character << @lines.join[(row_offset * n) + column_offset[1]]
+        braille_character << braille_assembler(row_offset, column_offset[0], n)
+        braille_character << braille_assembler(row_offset, column_offset[1], n)
       end
       decoded_braille = @alphabet.braille_letter_hash.key(braille_character.join)
       capital_check(decoded_braille)
     end
     @output.join
+  end
+
+  def braille_assembler(row, column, n)
+    @lines.join[(row * n) + column]
   end
 
   def capital_check(decoded_braille)
