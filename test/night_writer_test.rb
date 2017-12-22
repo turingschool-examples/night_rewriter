@@ -1,18 +1,11 @@
 require './test/test_helper'
 require './lib/night_writer'
-require './lib/alphabet'
+require 'pry'
 
 class NightWriterTest < Minitest::Test
 
   def writer
     @writer ||= NightWriter.new
-  end
-  def test_can_lookup
-    assert_equal ".", writer.lookup("a", 4)
-  end
-
-  def test_postion
-    assert_equal ".", writer.lookup(:capitalize, 0)
   end
 
   def test_can_encode_a_letter

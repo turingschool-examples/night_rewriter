@@ -40,5 +40,8 @@ class Alphabet
 			"?" => "..0.00"
 		}
 	end
-end
 
+  def lookup(character, position)
+    braille_letter_hash[character].chars[position]
+  end
+end
