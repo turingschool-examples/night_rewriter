@@ -1,8 +1,8 @@
-class Alphabet
-	attr_reader :braille_letter_hash
 
-	def initialize
-		@braille_letter_hash = {
+module Alphabet
+
+	def braille_letter_hash
+		{
 			"a" => "0.....",
 			"b" => "0.0...",
 			"c" => "00....",
@@ -40,5 +40,9 @@ class Alphabet
 			"?" => "..0.00"
 		}
 	end
-end
 
+	def lookup(character, position)
+    self.braille_letter_hash[character].chars[position]
+  end
+
+end
