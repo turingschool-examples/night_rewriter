@@ -1,10 +1,10 @@
 module Encoder_Helpers
 
   def offset_iterator(plain)
-    @offsets.each do |offset|
+    @offsets.map { |offset|
       letter_iterator(plain, offset)
       @output << "\n"
-    end
+    }
   end
 
   def letter_iterator(plain, offset)
