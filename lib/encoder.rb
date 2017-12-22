@@ -12,12 +12,19 @@ class Encoder
 
   def encode_to_braille(plain)
     [0,2,4].each do |offset|
-      plain.chars.each do |letter|
-        check_letter(letter, offset)
-      end
+      letter_iterator(plain, offset)
+      # plain.chars.each do |letter|
+      #   check_letter(letter, offset)
+      # end
       @output << "\n"
     end
     encoded = @output.join
+  end
+
+  def letter_iterator(plain, offset)
+    plain.chars.each do |letter|
+      check_letter(letter, offset)
+    end
   end
 
   def check_letter(letter, offset)
