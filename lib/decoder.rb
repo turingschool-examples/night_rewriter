@@ -33,7 +33,7 @@ class Decoder
   end
 
   def braille_decoder(braille_string)
-    @alphabet.braille_letter_hash.key
+    @alphabet.braille_letter_hash.key(braille_string)
   end
 
   def capital_check(decoded_braille)
