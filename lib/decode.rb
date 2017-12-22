@@ -2,14 +2,15 @@ require_relative 'alphabet'
 require 'pry'
 
 class EncodeFromBraille
+  attr_reader :output
   def initialize
     @alphabet = Alphabet.new
+    @output = []
   end
 
   def encode_from_braille(braille)
     lines = braille.split("\n")
     n = lines[0].length
-    output = []
     should_capitalize_next = false
 
     (0..(n-1)).each_slice(2) do |column_offset|
