@@ -18,5 +18,13 @@ class AlphabetTest < Minitest::Test
 			end
 		end
 	end
+
+  def test_can_lookup
+    assert_equal ".", alphabet.lookup("a", 4)
+  end
+
+  def test_postion
+    assert_equal ".", alphabet.lookup(:capitalize, 0)
+  end
 end
 
