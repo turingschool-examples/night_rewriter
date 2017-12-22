@@ -39,4 +39,3 @@ class NightWriterTest < Minitest::Test
     assert_equal "Hello World",writer.encode_from_braille("..0.0.0.0.0........00.0.0.00\n..00.00.0..0......00.0000..0\n.0....0.0.0..0...0.00.0.0...\n")
   end
 end
-
