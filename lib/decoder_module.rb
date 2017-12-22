@@ -4,9 +4,13 @@ module Decoder_Helpers
     (0..(n-1)).each_slice(2) do |column_offset|
       braille_character = []
       row_iterator(braille_character, column_offset, n)
-      decoded_braille = braille_decoder(braille_character.join)
-      capital_check(decoded_braille)
+      decode(braille_character)
     end
+  end
+
+  def decode(braille_character)
+    decoded_braille = braille_decoder(braille_character.join)
+    capital_check(decoded_braille)
   end
 
   def row_iterator(braille_character, column_offset, n)
