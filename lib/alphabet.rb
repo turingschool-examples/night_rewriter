@@ -40,5 +40,5 @@ class Alphabet
 			"?" => "..0.00"
 		}
 	end
-end
 
+end
